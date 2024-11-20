@@ -1,5 +1,6 @@
 from faker import Faker
 import random
+from collections import defaultdict
 
 fake = Faker()
 
@@ -68,13 +69,23 @@ def generate_orders(customer_ids, recipient_ids, composition_ids):
 
 # Generating data for the `requirements` table
 def generate_requirements(composition_ids):
-    requirements = []
-    for _ in range(20):
-        requirements.append((
-            random.choice(composition_ids),       # composition_id
-            random.randint(1, 100),               # quantity
-            round(random.uniform(10, 1000), 2)    # price
-        ))
+    requirements_dict = defaultdict(lambda: {'quantity': 0, 'price': 0.0})  # To sum quantity and price for each composition_id
+    
+    for _ in range(20):  # Number of entries to simulate
+        composition_id = random.choice(composition_ids)  # Choose an existing composition_id
+        quantity = random.randint(1, 100)  # Random quantity
+        price = round(random.uniform(10, 1000), 2)  # Random price
+        
+        # Aggregate quantity and price for the same composition_id
+        requirements_dict[composition_id]['quantity'] += quantity
+        requirements_dict[composition_id]['price'] += price
+    
+    # Flatten aggregated data into a list of tuples
+    requirements = [
+        (comp_id, data['quantity'], round(data['price'], 2))
+        for comp_id, data in requirements_dict.items()
+    ]
+    
     return requirements
 
 # Main function
