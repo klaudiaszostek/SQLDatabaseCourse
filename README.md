@@ -2,15 +2,22 @@
 Basic concepts and notions of relational databases, SQL basics, examples of database systems.
 
 1.
-The database serves as the foundation for an online flower shop (providing data management for the full functionality of the web-based store platform).
+The database serves as the foundation for an online flower shop 
+(providing data management for the full functionality of the web-based store platform).
 
-The online platform allow customers to select compositions from the shop's offerings. When placing an order, customers must provide their data (identifier and password) or register in the system if they are new customers (using the flower shop for the first time). Additionally, the customer must specify the delivery location and the recipient of the flowers.
+The online platform allow customers to select compositions from the shop's offerings. 
+When placing an order, customers must provide their data (identifier and password) 
+or register in the system if they are new customers (using the flower shop for the first time). 
+Additionally, the customer must specify the delivery location and the recipient of the flowers.
 
-The database also serves as the foundation for managing the flower shop. It should store information about the current inventory (quantities of individual compositions) and automatically report requirements for resources that are running low.
+The database also serves as the foundation for managing the flower shop. 
+It should store information about the current inventory (quantities of individual compositions) 
+and automatically report requirements for resources that are running low.
 
-The script creates tables for the "flower_shop" database in accordance with the project and description below (table and column names consistent with the logic of the database schema).
+The script creates tables for the "flower_shop" database in accordance with the project 
+and description below (table and column names consistent with the logic of the database schema).
 
-Customers Table:
+#Customers Table:
 customer_id - character type, up to 10 characters, primary key
 password (password hash) - character type, up to 10 characters, minimum 4 characters, required
 name - character type, up to 40 characters, required

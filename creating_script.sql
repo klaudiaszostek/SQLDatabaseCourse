@@ -51,9 +51,9 @@ CREATE TABLE orders (
     recipient_id BIGINT UNSIGNED NOT NULL,
     composition_id CHAR(5) NOT NULL,
     date DATE NOT NULL,
+    price NUMERIC(10,2),
     paid BOOLEAN,
     notes VARCHAR(200),
-    price NUMERIC(10,2),
     FOREIGN KEY (customer_id)  
         REFERENCES customers (customer_id) 
         ON DELETE CASCADE
