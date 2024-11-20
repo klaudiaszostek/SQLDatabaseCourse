@@ -93,23 +93,23 @@ def main():
     requirements = generate_requirements(composition_ids)
     
     # Displaying results as SQL
-    print("INSERT INTO customers VALUES ")
+    print("INSERT INTO customers(customer_id, password, name, city, postal_code, address, email, phone, fax, tax_id, company_id) VALUES")
     for c in customers:
         print(f"{c},")
     
-    print("\nINSERT INTO compositions VALUES ")
+    print("\nINSERT INTO compositions(composition_id, name, description, price, minimum_quantity, stock) VALUES")
     for c in compositions:
         print(f"{c},")
     
-    print("\nINSERT INTO recipients VALUES ")
+    print("\nINSERT INTO recipients(name, city, postal_code, address) VALUES")
     for r in recipients:
         print(f"{r},")
     
-    print("\nINSERT INTO orders VALUES ")
+    print("\nINSERT INTO orders(order_id, customer_id, recipient_id, composition_id, date, price, paid, notes) VALUES")
     for o in orders:
         print(f"{o},")
     
-    print("\nINSERT INTO requirements VALUES")
+    print("\nINSERT INTO requirements(composition_id, quantity, price) VALUES")
     for r in requirements:
         print(f"{r},")
 
