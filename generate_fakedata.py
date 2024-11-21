@@ -56,38 +56,29 @@ def generate_orders(customer_ids, recipient_ids, composition_ids):
         date = fake.date_between(start_date='-1y', end_date='today')
         formatted_date = date.strftime('%Y-%m-%d')  # date formatting
         orders.append((
-            fake.unique.random_int(1, 10000),     # order_id
-            random.choice(customer_ids),          # customer_id
-            random.choice(recipient_ids),         # recipient_id
-            random.choice(composition_ids),       # composition_id
-            formatted_date,                       # date
-            round(random.uniform(10, 1000), 2),   # price
-            random.choice([True, False]),         # paid
-            fake.sentence(nb_words=10)            # notes
+            fake.unique.random_int(1, 10000),       # order_id
+            random.choice(customer_ids),            # customer_id
+            random.choice(recipient_ids),           # recipient_id
+            random.choice(composition_ids),         # composition_id
+            formatted_date,                         # date
+            round(random.uniform(10, 1000), 2),     # price
+            random.choice([True, False]),           # paid
+            fake.sentence(nb_words=10)              # notes
         ))
     return orders
 
 # Generating data for the `requirements` table
 def generate_requirements(composition_ids):
-    requirements_dict = defaultdict(lambda: {'quantity': 0, 'price': 0.0})  # To sum quantity and price for each composition_id
-    
-    for _ in range(20):  # Number of entries to simulate
-        composition_id = random.choice(composition_ids)  # Choose an existing composition_id
-        quantity = random.randint(1, 100)  # Random quantity
-        price = round(random.uniform(10, 1000), 2)  # Random price
-        
-        # Aggregate quantity and price for the same composition_id
-        requirements_dict[composition_id]['quantity'] += quantity
-        requirements_dict[composition_id]['price'] += price
-    
-    # Flatten aggregated data into a list of tuples
-    requirements = [
-        (comp_id, data['quantity'], round(data['price'], 2))
-        for comp_id, data in requirements_dict.items()
-    ]
-    
+    requirements = []
+    for _ in range(20):
+        requirements.append((
+            random.choice(composition_ids),     # composition_id
+            random.randint(1, 100),             # quantity
+            round(random.uniform(10, 1000), 2)  # price
+        ))
     return requirements
 
+        
 # Main function
 def main():
     # Generating data
@@ -96,12 +87,13 @@ def main():
     recipients = generate_recipients()
     
     # Creating ID lists for relationships
-    customer_ids = [c[0] for c in customers]
-    composition_ids = [c[0] for c in compositions]
-    recipient_ids = list(range(1, len(recipients) + 1))  # recipient_id is serial
+    customer_id = [c[0] for c in customers]
+    composition_id = [c[0] for c in compositions]
+    recipient_id = list(range(1, len(recipients) + 1))  # recipient_id is serial
     
-    orders = generate_orders(customer_ids, recipient_ids, composition_ids)
-    requirements = generate_requirements(composition_ids)
+    orders = generate_orders(customer_id, recipient_id, composition_id)
+    requirements = generate_requirements(composition_id)  # requirement_id is serial
+    
     
     # Displaying results as SQL
     print("INSERT INTO customers(customer_id, password, name, city, postal_code, address, email, phone, fax, tax_id, company_id) VALUES")
