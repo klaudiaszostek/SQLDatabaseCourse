@@ -168,7 +168,7 @@ def orders():
     return render_template('orders.html', orders=orders)
 
 
-# Route: Inventory Management (Admin)
+# Route: Inventory Management (Admin - but everyone can see it on the /inventory path)
 @app.route('/inventory')
 def inventory():
     cursor = mysql.connection.cursor()

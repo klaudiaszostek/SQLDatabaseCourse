@@ -50,16 +50,16 @@ def generate_recipients():
     return recipients
 
 # Generating data for the `orders` table
-def generate_orders(customer_ids, recipient_ids, composition_ids):
+def generate_orders(customer_id, composition_id, recipient_id,):
     orders = []
     for _ in range(20):
         date = fake.date_between(start_date='-1y', end_date='today')
         formatted_date = date.strftime('%Y-%m-%d')  # date formatting
         orders.append((
             fake.unique.random_int(1, 10000),       # order_id
-            random.choice(customer_ids),            # customer_id
-            random.choice(recipient_ids),           # recipient_id
-            random.choice(composition_ids),         # composition_id
+            random.choice(customer_id),             # customer_id
+            random.choice(recipient_id),            # recipient_id
+            random.choice(composition_id),          # composition_id
             formatted_date,                         # date
             round(random.uniform(10, 1000), 2),     # price
             random.choice([True, False]),           # paid
@@ -78,8 +78,7 @@ def generate_requirements(composition_ids):
         ))
     return requirements
 
-        
-# Main function
+
 def main():
     # Generating data
     customers = generate_customers()
@@ -87,11 +86,11 @@ def main():
     recipients = generate_recipients()
     
     # Creating ID lists for relationships
-    customer_id = [c[0] for c in customers]
-    composition_id = [c[0] for c in compositions]
+    customer_id = [c[0] for c in customers]  # first index in `customers`
+    composition_id = [c[0] for c in compositions]  # first index in `compositions`
     recipient_id = list(range(1, len(recipients) + 1))  # recipient_id is serial
     
-    orders = generate_orders(customer_id, recipient_id, composition_id)
+    orders = generate_orders(customer_id, composition_id, recipient_id)
     requirements = generate_requirements(composition_id)  # requirement_id is serial
     
     
@@ -115,6 +114,8 @@ def main():
     print("\nINSERT INTO requirements(composition_id, quantity, price) VALUES")
     for r in requirements:
         print(f"{r},")
+
+# in the last lines replace ',' with ';' for each
 
 if __name__ == "__main__":
     main()
