@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Order</title>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=True) %} {% if
+    messages %}
+    <ul>
+      {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+
+    <h1>Available Compositions</h1>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Stock</th>
+      </tr>
+      {% for c in compositions %}
+      <tr>
+        <td>{{ c[0] }}</td>
+        <td>{{ c[1] }}</td>
+        <td>{{ c[3] }}</td>
+        <td>{{ c[2] }}</td>
+        <td>{{ c[4] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <form method="POST" action="/order">
+      <h2>Order Details</h2>
+      <label for="composition_id">Composition</label>
+      <select
+        id="composition_id"
+        name="composition_id"
+        required
+        onchange="updatePrice()"
+      >
+        <option value="">Select Composition</option>
+        {% for c in compositions %}
+        <option value="{{ c[0] }}" data-price="{{ c[2] }}">{{ c[1] }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="recipient_name">Recipient Name</label>
+      <input
+        type="text"
+        id="recipient_name"
+        name="recipient_name"
+        value="{{ customer_details[0] }}"
+        required
+      />
+
+      <label for="city">City</label>
+      <input
+        type="text"
+        id="city"
+        name="city"
+        value="{{ customer_details[1] }}"
+        required
+      />
+
+      <label for="postal_code">Postal Code</label>
+      <input
+        type="text"
+        id="postal_code"
+        name="postal_code"
+        value="{{ customer_details[2] }}"
+        required
+      />
+
+      <label for="address">Address</label>
+      <input
+        type="text"
+        id="address"
+        name="address"
+        value="{{ customer_details[3] }}"
+        required
+      />
+
+      <label for="price">Price</label>
+      <input type="text" id="price" name="price" readonly />
+
+      <label for="notes">Notes</label>
+      <textarea name="notes" placeholder="Notes"></textarea>
+
+      <button type="submit">Place Order</button>
+    </form>
+
+    <script>
+      function updatePrice() {
+        const compositionSelect = document.getElementById("composition_id");
+        const selectedOption =
+          compositionSelect.options[compositionSelect.selectedIndex];
+        const price = selectedOption.getAttribute("data-price");
+        document.getElementById("price").value = price ? price : "";
+      }
+    </script>
+  </body>
+</html>

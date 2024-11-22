@@ -1,0 +1,15 @@
+<h1>Low Stock Items</h1>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Stock</th>
+  </tr>
+  {% for item in low_stock %}
+  <tr>
+    <td>{{ item[0] }}</td>
+    <td>{{ item[1] }}</td>
+    <td>{{ item[5] }}</td>
+  </tr>
+  {% endfor %}
+</table>

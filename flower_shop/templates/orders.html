@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Your Orders</title>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <ul>
+      {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+
+    <h1>Your Orders</h1>
+    {% if orders %}
+    <table border="1">
+      <tr>
+        <th>Order ID</th>
+        <th>Composition</th>
+        <th>Date</th>
+        <th>Price</th>
+        <th>Paid</th>
+        <th>Recipient</th>
+        <th>Recipient Address</th>
+        <th>Notes</th>
+      </tr>
+      {% for order in orders %}
+      <tr>
+        <td>{{ order[0] }}</td>
+        <td>{{ order[1] }}</td>
+        <td>{{ order[2] }}</td>
+        <td>{{ order[3] }}</td>
+        <td>{{ 'Yes' if order[4] else 'No' }}</td>
+        <td>{{ order[5] }}</td>
+        <td>{{ order[6] }}, {{ order[7] }} {{ order[8] }}</td>
+        <td>{{ order[9] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    <p>No orders found.</p>
+    {% endif %}
+
+    <a href="/compositions">Back to Shop</a>
+  </body>
+</html>
