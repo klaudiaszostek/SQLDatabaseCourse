@@ -17,7 +17,7 @@ and automatically report requirements for resources that are running low. (inven
 The script creates tables for the "flower_shop" database in accordance with the project 
 and description below (table and column names consistent with the logic of the database schema).
 
-# Customers Table:
+### Customers Table:
 customer_id - character type, up to 10 characters, primary key
 password (password hash) - character type, up to 10 characters, minimum 4 characters, required
 name - character type, up to 40 characters, required
@@ -30,7 +30,7 @@ fax - character type, up to 16 characters
 tax_id - character type, exactly 13 characters
 company_id - character type, exactly 9 characters ✅
 
-# Compositions Table:
+### Compositions Table:
 composition_id - character type, exactly 5 characters, primary key
 name - character type, up to 40 characters, required
 description - character type, up to 100 characters
@@ -38,14 +38,14 @@ price - numeric type with 2 decimal precision, value not less than 10.00
 minimum_quantity - integer type
 stock - integer type ✅
 
-# Recipients Table:
+### Recipients Table:
 recipient_id - serial type, primary key
 name - character type, up to 40 characters, required
 city - character type, up to 40 characters, required
 postal_code - character type, exactly 6 characters, required
 address - character type, up to 40 characters, required ✅
 
-# Orders Table:
+### Orders Table:
 order_id - integer type, primary key
 customer_id - character type, up to 10 characters, foreign key, required
 recipient_id - integer type, foreign key, required
@@ -55,7 +55,7 @@ price - numeric type with 2 decimal precision
 paid - boolean type
 notes - character type, up to 200 characters ✅
 
-# Requirements Table:
+### Requirements Table:
 This table will manage the order of compositions needed for the flower shop's operations. ✅
 
 
@@ -69,12 +69,12 @@ Definitions of references between tables using foreign keys in the script includ
 
 
 ----------------------------------------------------------------------------------------------------------
-Summary of Web Application Functionality
+## Summary of Web Application Functionality
 
-Login and Registration:
+### Login and Registration:
 The customer can log in or register, and their data is saved in the customers table.
 
-Placing an Order:
+### Placing an Order:
 The customer selects a composition from a list.
 The form automatically fills in:
 Customer ID (readonly, from the session),
@@ -83,14 +83,14 @@ Delivery Address (city, postal code, address – retrieved from the registration
 Price (based on the selected composition).
 The customer can add notes.
 
-Saving the Order:
+### Saving the Order:
 The order (along with recipient and composition data) is saved in the database in the orders and recipients tables.
 The stock of the composition in the compositions table is automatically updated (decreased by 1).
 
-Viewing Orders:
+### Viewing Orders:
 The customer can view their orders (ID, composition, price, payment status, recipient details, and notes).
 
-Stock Management:
+### Stock Management:
 Administrators can see a list of compositions with low stock levels (e.g., below 5).
 
-Purpose of the Application: A simple online flower shop system with customer functionality (login, placing orders) and basic inventory management for administrators.
+## Purpose of the Application: A simple online flower shop system with customer functionality (login, placing orders) and basic inventory management for administrators.
