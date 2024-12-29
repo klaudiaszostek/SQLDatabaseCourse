@@ -17,7 +17,7 @@ and automatically report requirements for resources that are running low. (inven
 The script creates tables for the "flower_shop" database in accordance with the project 
 and description below (table and column names consistent with the logic of the database schema).
 
-#Customers Table:
+# Customers Table:
 customer_id - character type, up to 10 characters, primary key
 password (password hash) - character type, up to 10 characters, minimum 4 characters, required
 name - character type, up to 40 characters, required
@@ -30,7 +30,7 @@ fax - character type, up to 16 characters
 tax_id - character type, exactly 13 characters
 company_id - character type, exactly 9 characters ✅
 
-Compositions Table:
+# Compositions Table:
 composition_id - character type, exactly 5 characters, primary key
 name - character type, up to 40 characters, required
 description - character type, up to 100 characters
@@ -38,14 +38,14 @@ price - numeric type with 2 decimal precision, value not less than 10.00
 minimum_quantity - integer type
 stock - integer type ✅
 
-Recipients Table:
+# Recipients Table:
 recipient_id - serial type, primary key
 name - character type, up to 40 characters, required
 city - character type, up to 40 characters, required
 postal_code - character type, exactly 6 characters, required
 address - character type, up to 40 characters, required ✅
 
-Orders Table:
+# Orders Table:
 order_id - integer type, primary key
 customer_id - character type, up to 10 characters, foreign key, required
 recipient_id - integer type, foreign key, required
@@ -55,7 +55,7 @@ price - numeric type with 2 decimal precision
 paid - boolean type
 notes - character type, up to 200 characters ✅
 
-Requirements Table:
+# Requirements Table:
 This table will manage the order of compositions needed for the flower shop's operations. ✅
 
 
