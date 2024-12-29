@@ -1,3 +1,5 @@
+# Introduction
+
 ### Creating a database
 The MySQL database engine installed on the university server. Access to it is possible for everyone using the student.agh.edu.pl server.
 
