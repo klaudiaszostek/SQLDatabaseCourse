@@ -1,5 +1,4 @@
-# SQLDatabaseCourse
-Basic concepts and notions of relational databases, SQL basics, examples of database systems.
+# Flower shop
 
 1.
 The database serves as the foundation for an online flower shop 
