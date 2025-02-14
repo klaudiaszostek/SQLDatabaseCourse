@@ -1,4 +1,4 @@
-# 5
+# 6
 
 Tasks based on cukierki.sql:
 - Orders are placed by customers — "zamowienia" table
